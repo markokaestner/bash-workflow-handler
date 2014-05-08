@@ -17,7 +17,18 @@ RESULTS=()
 # $7 autocomplete
 ###############################################################################
 addResult() {
-  RESULT="<item uid='$(xmlEncode "$1")' arg='$(xmlEncode "$2")' valid='$6' autocomplete='$7'><title>$(xmlEncode "$3")</title><subtitle>$(xmlEncode "$4")</subtitle><icon>$(xmlEncode "$5")</icon></item>"
+  RESULT="<item uid=\"$(xmlEncode "$1")\" arg=\"$(xmlEncode "$2")\" valid=\"$6\" autocomplete=\"$7\"><title>$(xmlEncode "$3")</title><subtitle>$(xmlEncode "$4")</subtitle>"
+  if [[ $5 =~ fileicon:* ]]; then
+    icon=`echo $5 | sed -e 's/fileicon://g'`
+    RESULT="${RESULT}<icon type=\"fileicon\">$(xmlEncode "${icon}")</icon>"
+  elif [[ $5 =~ filetype:* ]]; then
+    icon=`echo $5 | sed -e 's/filetype://g'`
+    RESULT="${RESULT}<icon type=\"filetype\">$(xmlEncode "${icon}")</icon>"
+  else
+    RESULT="${RESULT}<icon>$(xmlEncode "$5")</icon>"
+  fi
+    RESULT="${RESULT}</item>"
+
   RESULTS+=("$RESULT")
 }
 
