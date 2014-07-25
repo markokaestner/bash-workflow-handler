@@ -17,7 +17,7 @@ RESULTS=()
 # $7 autocomplete
 ###############################################################################
 addResult() {
-  RESULT="<item uid='$(xmlEncode "$1")' arg='$(xmlEncode "$2")' valid='$6' autocomplete='$7'><title>$(xmlEncode "$3")</title><subtitle>$(xmlEncode "$4")</subtitle><icon>$(xmlEncode "$5")</icon></item>"
+  RESULT="<item uid='$(xmlEncode "$1")' valid='$6' autocomplete='$7'><arg>$(xmlEncode "$2")</arg><title>$(xmlEncode "$3")</title><subtitle>$(xmlEncode "$4")</subtitle><icon>$(xmlEncode "$5")</icon></item>"
   RESULTS+=("$RESULT")
 }
 
